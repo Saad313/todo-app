@@ -20,7 +20,7 @@ const TodoList: React.FC = () => {
 
   return (
     <VStack spacing={4} align="stretch">
-      {todos.map(todo => (
+      {todos?.length && todos?.map(todo => (
         <Box key={todo.id} p={4} borderWidth={1} borderRadius="md">
           {editId === todo.id ? (
             <HStack>

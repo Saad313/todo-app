@@ -19,7 +19,7 @@ interface TodoContextType {
 
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
-const API_URL = 'https://jsonplaceholder.typicode.com/todos';
+const API_URL = 'http://localhost:3000/posts';
 
 export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -30,8 +30,8 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const fetchTodos = async (page: number) => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}?_page=${page}&_limit=5`);
-      const data = await res.json();
+      const res = await fetch(`${API_URL}?_page=${page}&_per_page=5`);
+      const data = await res?.json()?.then((r) => r.data);
       setTodos(data);
     } finally {
       setLoading(false);
